@@ -16,27 +16,50 @@ Python の Pygame ライブラリを使ったシンプルなオセロ（リバ�
 
 ## 📦 必要なライブラリ
 
-このゲームは [Pygame](https://www.pygame.org/) を使っています。
+- Python 3.7+
+- Pygame 2.0+
 
-### インストール方法
+このゲームは [Pygame](https://www.pygame.org/) を使用しています。  
+依存ライブラリはすべて `requirements.txt` に記載されています。
+
+---
+
+## 🚀 実行方法
+
+### 1. 仮想環境の作成（推奨）
 
 ```bash
-pip install pygame
+python3 -m venv venv
+source venv/bin/activate
 ```
 
-### ▶️ 起動方法
+### 2. ライラリのインストール
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. ゲームの起動
+
 ```bash
 python othello.py
 ```
 
-### 📁 ファイル構成
-```bash
+---
+
+## 📁 ファイル構成
+
+```
 othello/
 ├── othello.py       # メインのゲームロジック
+├── requirements.txt # 依存ライブラリ一覧（pygame含む）
 └── README.md        # このファイル
 ```
 
-### 🧠 実装されている機能
+---
+
+## 🧠 実装されている機能
+
 - 石の置ける場所の自動判定
 - 石を裏返す処理
 - ターンの自動交代
@@ -44,17 +67,27 @@ othello/
 - ゲーム終了時の勝敗判定と表示
 - 「New Game」または「Quit」選択画面
 
-### 🎨 スクリーンショット
+---
+
+## 🎨 スクリーンショット
+
 ![ゲーム画面](images/screenshot1.jpg)
 
-### 🛠️ 今後の拡張アイデア
+---
+
+## 🛠️ 今後の拡張アイデア
+
 - ヒント機能（置ける場所をハイライト）
 - 対AI戦モード
 - タイマー追加
 - スコア履歴の記録
 
-### 📜 ライセンス
+---
+
+## 📜 ライセンス
+
 MIT License
+
 - [MIT License](https://opensource.org/licenses/MIT)
 - [Pygame License](https://www.pygame.org/wiki/license)
 - [Python License](https://docs.python.org/3/license.html)
