@@ -94,6 +94,41 @@ def show_result(winner_text):
     pygame.display.flip()
     pygame.time.wait(3000)
 
+def show_result_screen(result_text):
+    font = pygame.font.SysFont(None, 48)
+    small_font = pygame.font.SysFont(None, 36)
+
+    result_surface = font.render(result_text, True, BLACK)
+    new_game_surface = small_font.render("New Game", True, WHITE)
+    quit_surface = small_font.render("Quit", True, WHITE)
+
+    result_rect = result_surface.get_rect(center=(WIDTH//2, HEIGHT//3))
+    new_game_rect = pygame.Rect(WIDTH//2 - 100, HEIGHT//2, 200, 50)
+    quit_rect = pygame.Rect(WIDTH//2 - 100, HEIGHT//2 + 70, 200, 50)
+
+    while True:
+        screen.fill(GREEN)
+        screen.blit(result_surface, result_rect)
+
+        pygame.draw.rect(screen, BLACK, new_game_rect)
+        pygame.draw.rect(screen, BLACK, quit_rect)
+
+        screen.blit(new_game_surface, new_game_surface.get_rect(center=new_game_rect.center))
+        screen.blit(quit_surface, quit_surface.get_rect(center=quit_rect.center))
+
+        pygame.display.flip()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                x, y = pygame.mouse.get_pos()
+                if new_game_rect.collidepoint(x, y):
+                    return "new_game"
+                elif quit_rect.collidepoint(x, y):
+                    return "quit"
+
 def main():
     board = init_board()
     current_color = BLACK_STONE
@@ -109,12 +144,18 @@ def main():
             if not valid_moves(board, current_color):
                 blacks, whites = count_stones(board)
                 if blacks > whites:
-                    show_result("Black won!")
+                    result = "Black won!"
                 elif whites > blacks:
-                    show_result("White won!")
+                    result = "White won!"
                 else:
-                    show_result("Draw!")
-                running = False
+                    result = "Draw!"
+                action = show_result_screen(result)
+                if action == "new_game":
+                    main()
+                else:
+                    pygame.quit()
+                    sys.exit()
+                return
             continue
 
         for event in pygame.event.get():
